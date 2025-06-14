@@ -3,3 +3,13 @@ node_modules
 test-ledger
 .DS_Store
 target
+*.swp
+target/
+**/*.rs.bk
+*.pdb
+clippy/Cargo.toml
+clippy/Cargo.lock
+.idea
+.vscode
+*.iml
+.anchor
