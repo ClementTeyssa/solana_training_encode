@@ -28,4 +28,3 @@ pub struct Initialize<'info> {
 pub struct MyAccount {
     pub balance: u64,
 }
-

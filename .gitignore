@@ -1,4 +1,5 @@
 .git-backup
+package-lock.json
 node_modules
 test-ledger
 .DS_Store
@@ -13,3 +14,5 @@ clippy/Cargo.lock
 .vscode
 *.iml
 .anchor
+Cargo.lock
+yarn.lock
