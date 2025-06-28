@@ -16,16 +16,16 @@ pub mod w3_e11 {
 
     pub fn update_balance(ctx: Context<UpdateBalance>) -> Result<()> {
         let my_account_balance: &mut u64 = &mut ctx.accounts.my_account.balance;
-        match my_account_balance {
+        match *my_account_balance {
             0..=900 => {
-                my_account_balance += 100;
+                *my_account_balance += 100;
                 msg!("Account balance received 100");
             }
             901..=999 => {
-                my_account_balance = 1000;
-                msg!("Account balance is now at the maximum : 1000")
+                *my_account_balance = 1000;
+                msg!("Account balance is now at the maximum: 1000");
             }
-            1001..=u64::MAX => return err!(MyError::BalanceTooHigh),
+            1000.. => return err!(MyError::BalanceTooHigh),
         }
         Ok(())
     }
@@ -40,6 +40,12 @@ pub struct Initialize<'info> {
     pub system_program: Program<'info, System>,
 }
 
+#[derive(Accounts)]
+pub struct UpdateBalance<'info> {
+    #[account(mut)]
+    pub my_account: Account<'info, MyAccount>,
+}
+
 #[account]
 pub struct MyAccount {
     pub balance: u64,
@@ -50,3 +56,4 @@ pub enum MyError {
     #[msg("MyAccount could not update the balance higher than 1000")]
     BalanceTooHigh,
 }
+
